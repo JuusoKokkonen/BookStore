@@ -24,7 +24,7 @@ public class CategoryController {
 		return "categorylist";
 	}
 	
-	// New category a book
+	// New category
 		@RequestMapping(value = "/savecategory", method = RequestMethod.POST)
 		public String saveBook(Category category) {
 			cRepository.save(category);

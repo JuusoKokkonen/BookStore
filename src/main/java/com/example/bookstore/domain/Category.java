@@ -58,8 +58,10 @@ public class Category {
 	// ToString
 	@Override
 	public String toString() {
-		return "Category [categoryid=" + categoryid + ", name=" + name + ", books=" + books + "]";
+		return "Category [categoryid=" + categoryid + ", name=" + name + "]";
 	}
+
+	
 
 	
 }
