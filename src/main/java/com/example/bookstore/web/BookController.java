@@ -72,4 +72,20 @@ public class BookController {
 		return "redirect:../booklist";
 	}
 	
+	// Login page
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String loginPage() {
+		return "login";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
