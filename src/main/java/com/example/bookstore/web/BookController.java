@@ -52,11 +52,13 @@ public class BookController {
 	public String saveBook(Book book) {
 		bRepository.save(book);
 		return "redirect:booklist";
+		
 	}
 	
 	// Edit a book
 	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
 	public String editBook(@PathVariable("id") Long bookId, Model model) {
+		model.addAttribute("categories", cRepository.findAll());
 		model.addAttribute("Book", bRepository.findById(bookId));
 		return "editbook";
 	}
