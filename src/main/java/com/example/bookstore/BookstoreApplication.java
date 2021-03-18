@@ -12,6 +12,8 @@ import com.example.bookstore.domain.Book;
 import com.example.bookstore.domain.BookRepository;
 import com.example.bookstore.domain.Category;
 import com.example.bookstore.domain.CategoryRepository;
+import com.example.bookstore.domain.User;
+import com.example.bookstore.domain.UserRepository;
 
 @SpringBootApplication
 public class BookstoreApplication {
@@ -23,7 +25,7 @@ public class BookstoreApplication {
 	}
 
 	@Bean
-	public CommandLineRunner demo(BookRepository bRepository, CategoryRepository cRepository) {
+	public CommandLineRunner demo(BookRepository bRepository, CategoryRepository cRepository, UserRepository uRepository) {
 		return (args) -> {
 			Category category1 = new Category("Comic");
 			Category category2 = new Category("Fantasy");
@@ -41,6 +43,12 @@ public class BookstoreApplication {
 			bRepository.save(demo2);
 			bRepository.save(demo3);
 			
+			User user1 = new User("user", "$2a$06$3jYRJrg0ghaaypjZ/.g4SethoeA51ph3UD4kZi9oPkeMTpjKU5uo6", "USER");
+			User user2 = new User("admin", "$2a$10$0MMwY.IQqpsVc1jC8u7IJ.2rT8b0Cd3b3sfIBGV2zfgnPGtT4r0.C", "ADMIN");
+			uRepository.save(user1);
+			uRepository.save(user2);
+
+			
 			log.info("Fetch all the books");
 			for (Book book : bRepository.findAll()) {
 			   log.info(book.toString());
@@ -49,6 +57,11 @@ public class BookstoreApplication {
 			log.info("Fetch all the categories");
 			for (Category category : cRepository.findAll()) {
 			   log.info(category.toString());
+			}
+			
+			log.info("Fetch all users");
+			for (User user : uRepository.findAll()) {
+			   log.info(user.toString());
 			}
 			
 		};
