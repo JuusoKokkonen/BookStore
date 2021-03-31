@@ -31,8 +31,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http
         .authorizeRequests()
-        	.antMatchers("/css/**", "/login").permitAll()
+        	.antMatchers("/css/**", "/login", "/h2-console/**").permitAll()
         	.anyRequest().authenticated()
+        	.and()
+        	.csrf().ignoringAntMatchers("/h2-console/**")
+        	.and()
+        	.headers().frameOptions().sameOrigin()
         	.and()
       .formLogin()
           .loginPage("/login")
@@ -45,9 +49,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(userDetailsService).passwordEncoder(new
-				BCryptPasswordEncoder());
+		auth.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
 	}
+	
+	
+	// IN MEMORY USERS
+	
 //	@Bean
 //	@Override
 //	public UserDetailsService userDetailsService() {
